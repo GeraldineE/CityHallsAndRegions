@@ -1,0 +1,55 @@
+{% extends 'region/layout.html' %}
+
+{% block breadcrumb %}
+<nav aria-label="breadcrumb" style="background-color: #e9ecef;">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'region-list' %}">Regions</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ object.name }}</li>
+    </ol>
+</nav>
+{% endblock %}
+
+{% block header %}
+<h1>
+    Region - {{ object.name  }}
+</h1>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body p-0">
+        <table class="table table-borderless table-striped">
+            <tbody>
+                <tr>
+                    <td>Id</td>
+                    <td>{{ object.id }}</td>
+                </tr>
+                <tr>
+                    <td>Code</td>
+                    <td>{{ object.code }}</td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>{{ object.name }}</td>
+                </tr>
+                <tr>
+                    <td>City Halls</td>
+                    <td>
+                        {% if object.city_halls.all|length %}
+                        <ul class="pl-0">
+                            {% for city_hall in object.city_halls.all %}
+                            <li>
+                                <a href="{% url 'city-hall-detail' pk=city_hall.id %}">{{ city_hall.name }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        No have City Halls
+                        {% endif %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
