@@ -18,6 +18,7 @@ class CityHallCreate(CreateView):
 
 class CityHallList(ListView):
     model = CityHall
+    context_object_name = "city_hall_list"
 
 
 class CityHallDetail(DetailView):
